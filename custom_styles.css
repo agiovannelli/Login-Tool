@@ -1,0 +1,15 @@
+#main {
+  padding-left: 10px;
+}
+
+.form {
+  padding-top: 10px;
+}
+
+.column-textbox {
+  width: auto;
+}
+
+.url-textbox {
+  width: 50%;
+}
