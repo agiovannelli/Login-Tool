@@ -1,18 +1,28 @@
-const zerorpc = require("zerorpc");
-let client = new zerorpc.Client();
-client.connect("tcp://127.0.0.1:4242");
+'use strict';
+// let loginAutomator = require('loginAutomator.js');
 
-let formula = document.querySelector("#formula");
-let result = document.querySelector("#result");
+var submitBtn = document.getElementById('submitBtn');
 
-formula.addEventListener("input", () => {
-  client.invoke("calc", formula.value, (error, res) => {
-    if (error) {
-      console.error(error);
-    } else {
-      result.textContent = res;
-    }
-  });
+submitBtn.addEventListener('click', () => {
+    console.log('HI');
 });
 
-formula.dispatchEvent(new Event("input"));
+let start = function (fileNames) {
+    dialog.showOpenDialog((fileNames) => {
+        // fileNames is an array that contains all the selected
+        if (fileNames === undefined) {
+            console.log("No file selected");
+            return;
+        }
+
+        fs.readFile(filepath, 'utf-8', (err, data) => {
+            if (err) {
+                alert("An error ocurred reading the file :" + err.message);
+                return;
+            }
+
+            // Change how to handle the file content
+            console.log("The file content is : " + data);
+        });
+    });
+};

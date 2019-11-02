@@ -1,63 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Classlink Login Application</title>
-    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="custom_styles.css" />
-  </head>
-  <body>
-    <section id="main">
-      <div>
-        <h1>Classlink Automated Login Tool</h1>
-        
-        <form class="form">
-          <div class="form-group">
-            <label for="websiteUrlInput">Classlink URL</label>
-            <input
-              type="text"
-              class="form-control url-textbox"
-              id="websiteUrlInput"
-              value="https://launchpad.classlink.com/gevsd"
-              required
-            />
-          </div>
 
-          <div class="form-group">
-            <label for="studentInputFile">Student File Input</label>
-            <input type="file" id="studentInputFile" required />
-            <p class="help-block">
-              Select the .csv file of students data to import.
-            </p>
-          </div>
+<head>
+  <title>Classlink Login Application</title>
+  <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="styles/custom_styles.css" />
+</head>
 
-          <div class="form-group">
-            <label for="userNameColumnInput">Username Column</label>
-            <input
-              type="text"
-              class="form-control column-textbox"
-              id="userNameColumnInput"
-              placeholder="Column Number"
-              required
-            />
-          </div>
+<body>
+  <section id="main">
+    <div>
+      <h1>Classlink Automated Login Tool</h1>
 
-          <div class="form-group">
-            <label for="passwordColumnInput">Password Column</label>
-            <input
-              type="text"
-              class="form-control column-textbox"
-              id="passwordColumnInput"
-              placeholder="Column Number"
-              required
-            />
-          </div>
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-          </div>
-        </form>
-
+      <div class="form-group">
+        <label for="websiteUrlInput">Classlink URL</label>
+        <input type="text" class="form-control url-textbox" id="websiteUrlInput"
+          value="https://launchpad.classlink.com/gevsd" />
       </div>
-    </section>
-  </body>
+
+      <div class="form-group">
+        <label for="studentInputFile">Student File Input</label>
+        <input type="file" id="studentInputFile" />
+        <p class="help-block">
+          Select the .csv file of students data to import.
+        </p>
+      </div>
+
+      <div class="form-group">
+        <label for="userNameColumnInput">Username Column</label>
+        <input type="text" class="form-control column-textbox" id="userNameColumnInput" placeholder="Column Number" />
+      </div>
+
+      <div class="form-group">
+        <label for="passwordColumnInput">Password Column</label>
+        <input type="text" class="form-control column-textbox" id="passwordColumnInput" />
+      </div>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+      </div>
+
+    </div>
+  </section>
+  <script src="./renderer.js"></script>
+</body>
+
 </html>
