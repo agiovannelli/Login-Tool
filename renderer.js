@@ -39,10 +39,27 @@ var createLoginDataObject = function (userData) {
     return loginData;
 }
 
-var loginUsers = function (users) {
-    var driver = new selenium.Builder().withCapabilities(selenium.Capabilities.chrome()).build();
-    setTimeout(()=>{}, 2000);
-    driver.get('https://www.google.com/');
-    setTimeout(() => { console.log('hi'); }, 4000);
-    driver.quit();
+var asyncForEach = async function (users, driver) {
+    for (let index = 0; index < users.length; index++) {
+      await driverOperations(users[index], driver);
+    }
+}
+
+var driverOperations = async function(user, driver) {
+    await driver.get('https://launchpad.classlink.com/gevsd');
+    await driver.findElement(selenium.By.className('btn')).click();
+    await driver.findElement(selenium.By.name('UserName')).sendKeys(user.username);
+    await driver.findElement(selenium.By.name('Password')).sendKeys(user.password);
+    await driver.findElement(selenium.By.id('submitButton')).click();
+    await driver.sleep(2000);
+    await driver.manage().deleteAllCookies();
+}
+
+var loginUsers = async function (users) {
+    var driver = await new selenium.Builder().withCapabilities(selenium.Capabilities.chrome()).build();
+    try {
+        await asyncForEach(users, driver);
+    } finally {
+        await driver.quit();
+    }
 }
