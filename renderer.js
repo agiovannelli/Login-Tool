@@ -3,7 +3,13 @@
 // Required modules.
 var fs = require('fs');
 var papaParse = require('papaparse');
-// var selenium = require('selenium');
+
+// Web automation variables.
+var selenium = require('selenium-webdriver');
+var chrome = require('selenium-webdriver/chrome');
+var chromeDriver = require('chromedriver')
+
+chrome.setDefaultService(new chrome.ServiceBuilder(chromeDriver.path).build());
 
 // Index.html elements.
 var fileInputValue = document.getElementById('studentInputFile');
@@ -13,30 +19,15 @@ var submitBtn = document.getElementById('submitBtn');
 
 // Event listeners.
 submitBtn.addEventListener('click', () => {
-    var rawData;
-    var modifiedFilePath = filePathModifier();
-    fs.readFile(modifiedFilePath, "utf-8", (err, data) => {
-        rawData = data;
+    fs.readFile(fileInputValue.files[0].path, "utf-8", (err, data) => {
+        var users = createLoginDataObject(papaParse.parse(data));
+        users.length ? loginUsers(users) : console.log('Failed to execute.');
     });
-    var result = papaParse.parse(rawData);
-    var users = createLoginDataObject(result);
-
 });
-
-// Functions.
-var filePathModifier = function () {
-    var modifiedFilePath;
-    if (!!fileInputValue.value) {
-        var startingIndex = fileInputValue.value.lastIndexOf("\\") + 1;
-        modifiedFilePath = fileInputValue.value.slice(startingIndex);
-    }
-
-    return modifiedFilePath;
-}
 
 var createLoginDataObject = function (userData) {
     var loginData = [];
-    if (!!userData.data) {
+    if (userData && userData.data.length) {
         userData.data.forEach(user => {
             loginData.push({
                 username: user[parseInt(userNameColumnInput.value) - 1],
@@ -44,5 +35,14 @@ var createLoginDataObject = function (userData) {
             });
         });
     }
+
     return loginData;
+}
+
+var loginUsers = function (users) {
+    var driver = new selenium.Builder().withCapabilities(selenium.Capabilities.chrome()).build();
+    setTimeout(()=>{}, 2000);
+    driver.get('https://www.google.com/');
+    setTimeout(() => { console.log('hi'); }, 4000);
+    driver.quit();
 }
