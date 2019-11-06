@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+#Packaged application
+classlink-login-tool-win32-x64/
